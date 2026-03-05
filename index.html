@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elghali Sany — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sand: #e8ddc8;
+    --terracotta: #c46a3a;
+    --ink: #1a1614;
+    --gold: #b8962e;
+    --cream: #f5efe4;
+    --muted: #7a6f65;
+    --border: rgba(184,150,46,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--ink);
+    color: var(--sand);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(26,22,20,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--sand); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8rem 4rem 5rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-subtitle {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 360px;
+    font-style: italic;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn:hover { background: var(--gold); color: var(--ink); }
+
+  .hero-right {
+    position: relative;
+    border-left: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Moroccan geometric pattern */
+  .geo-pattern {
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    background-image: 
+      repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+    background-size: 40px 40px;
+  }
+
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 3rem;
+    padding: 4rem;
+    position: relative; z-index: 1;
+    animation: fadeIn 1.2s 0.5s ease both;
+  }
+
+  .stat-item { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+
+  .stat-number {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 2rem; margin-bottom: 5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--ink);
+    border-top: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p strong {
+    color: var(--terracotta);
+    font-weight: 400;
+  }
+
+  .info-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .info-row {
+    display: flex; justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .info-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .info-val { font-size: 1rem; color: var(--sand); }
+
+  /* EXPERIENCE */
+  #experience { background: #161210; border-top: 1px solid var(--border); }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 4rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .exp-item.visible { opacity: 1; transform: translateY(0); }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    padding-top: 0.3rem;
+  }
+
+  .exp-company {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--cream);
+  }
+
+  .exp-role {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--terracotta);
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .exp-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* SKILLS */
+  #skills { background: var(--ink); border-top: 1px solid var(--border); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .skill-card {
+    background: #161210;
+    padding: 2.5rem;
+    transition: background 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .skill-card.visible { opacity: 1; transform: translateY(0); }
+  .skill-card:hover { background: #1e1915; }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .skill-name {
+    font-size: 1.2rem;
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* PROJECT */
+  #project { background: #161210; border-top: 1px solid var(--border); }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .project-info { padding: 4rem; }
+
+  .project-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .project-title {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    color: var(--cream);
+    font-style: italic;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .project-visual {
+    background: #0f0d0b;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    border-left: 1px solid var(--border);
+  }
+
+  .chart-container { padding: 2rem; width: 100%; }
+
+  .chart-bar-group { margin-bottom: 1.2rem; }
+  .chart-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+  .chart-bar-wrap { display: flex; align-items: center; gap: 1rem; }
+  .chart-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 0;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .chart-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terracotta), var(--gold));
+    width: 0;
+    transition: width 1.2s ease;
+  }
+  .chart-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+    min-width: 2rem;
+    text-align: right;
+  }
+
+  /* LANGUAGES */
+  #languages { background: var(--ink); border-top: 1px solid var(--border); }
+
+  .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+  .lang-card {
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: border-color 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .lang-card.visible { opacity: 1; transform: translateY(0); }
+  .lang-card:hover { border-color: var(--gold); }
+
+  .lang-name { font-size: 1.3rem; color: var(--cream); margin-bottom: 0.5rem; }
+  .lang-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+  }
+  .lang-note { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+
+  /* CONTACT */
+  #contact { background: var(--terracotta); border-top: 1px solid var(--border); }
+
+  #contact .section-title { color: var(--ink); }
+  #contact .section-num { color: var(--ink); opacity: 0.5; }
+  #contact .section-line { background: rgba(26,22,20,0.2); }
+
+  .contact-content {
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+
+  .contact-headline {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.1;
+    max-width: 600px;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; text-align: right; }
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .contact-link:hover { opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    background: #0d0b09;
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  /* DECORATIVE */
+  .ornament {
+    position: absolute;
+    width: 300px; height: 300px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ornament::before {
+    content: '';
+    position: absolute; inset: 20px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+  }
+  .ornament::after {
+    content: '';
+    position: absolute; inset: 40px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section { padding: 5rem 2rem; }
+    .about-grid, .project-card, .skills-grid, .lang-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    .contact-content { flex-direction: column; gap: 3rem; }
+    .contact-links { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ES — Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#project">PFE</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Master Achats & Supply Chain · Business Analysis</p>
+    <h1 class="hero-name">Elghali<br><em>Sany</em></h1>
+    <p class="hero-subtitle">Business Analyst & Analyste Financier en formation, passionné par la data et la prise de décision.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn">Découvrir mon parcours</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="geo-pattern"></div>
+    <div class="ornament"></div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">C2</div>
+        <div class="stat-label">Niveau TCF Français</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Mois de stage professionnel</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Langues maîtrisées</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">À propos</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Étudiant en <strong>Master Achats & Supply Chain / Business Analysis</strong> au sein d'une école de commerce française, je suis animé par une passion pour l'analyse de données, le pilotage de la performance et l'aide à la décision stratégique.</p>
+      <p>Mon parcours académique et professionnel m'a permis de développer une rigueur analytique solide, notamment à travers mon <strong>stage chez SAN MAROC</strong> où j'interviens comme Business Analyst dans le domaine du recouvrement de créances.</p>
+      <p>Curieux et méthodique, je m'épanouis à l'intersection de la <strong>finance, de la data et de la stratégie</strong>, avec toujours comme objectif de transformer des données brutes en décisions à valeur ajoutée.</p>
+    </div>
+    <div class="info-list">
+      <div class="info-row">
+        <span class="info-key">Formation</span>
+        <span class="info-val">Master Achats & Supply Chain</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Spécialité</span>
+        <span class="info-val">Business Analysis</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Nationalité</span>
+        <span class="info-val">Marocaine</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Localisation</span>
+        <span class="info-val">France / Casablanca</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Français</span>
+        <span class="info-val">TCF C2 — 611 pts</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Disponibilité</span>
+        <span class="info-val">Stage en cours (02/2026)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Expériences</h2>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-period">Fév. — Août 2026</div>
+    <div>
+      <div class="exp-company">SAN MAROC</div>
+      <div class="exp-role">Stagiaire Business Analyst – Suivi de la Performance Financière</div>
+      <div class="exp-desc">
+        Intégré au Pôle Analyse Financière & Performance de SAN MAROC, spécialisée dans le recouvrement amiable de créances, j'assure l'analyse des portefeuilles clients, le suivi des impayés et la construction de tableaux de bord Excel. Je produis des reportings périodiques et formule des recommandations opérationnelles pour améliorer les taux d'encaissement.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">Analyse Financière</span>
+        <span class="tag">Excel Avancé</span>
+        <span class="tag">Reporting</span>
+        <span class="tag">Aide à la décision</span>
+        <span class="tag">Stage à distance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-period">2021 — 2022</div>
+    <div>
+      <div class="exp-company">France Éducation International</div>
+      <div class="exp-role">Certification TCF — Niveau C2 (611 points)</div>
+      <div class="exp-desc">
+        Obtention du Test de Connaissance du Français au niveau C2 du CECRL, attestant une maîtrise exceptionnelle de la langue française, aussi bien à l'écrit qu'à l'oral. Épreuve passée au Centre de Casablanca – Institut français.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">Compréhension Orale C1</span>
+        <span class="tag">Maîtrise Structures C2</span>
+        <span class="tag">Expression Écrite B2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Compétences</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <span class="skill-icon">📊</span>
+      <div class="skill-name">Analyse Financière</div>
+      <div class="skill-desc">Analyse de portefeuilles clients, suivi des encours et des impayés, évaluation de la rentabilité et des ratios financiers.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">📈</span>
+      <div class="skill-name">Excel & Tableaux de bord</div>
+      <div class="skill-desc">Construction de dashboards structurés, formules avancées, modélisation de données et visualisation de KPIs.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">📋</span>
+      <div class="skill-name">Reporting & Aide à la décision</div>
+      <div class="skill-desc">Production de reportings périodiques, synthèses opérationnelles et recommandations stratégiques basées sur les données.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-name">Analyse de marché</div>
+      <div class="skill-desc">Étude de la rentabilité de supports publicitaires, analyse géo-économique, segmentation et profilage de zones.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">💬</span>
+      <div class="skill-name">Communication professionnelle</div>
+      <div class="skill-desc">Rédaction de rapports académiques et professionnels, communication à distance, gestion de relations en contexte interculturel.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🧠</span>
+      <div class="skill-name">Méthode & Rigueur analytique</div>
+      <div class="skill-desc">Approche méthodologique rigoureuse, structuration de la démarche de recherche, collecte et traitement de données qualitatives et quantitatives.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Projet de Fin d'Études</h2>
+  </div>
+  <div class="project-card">
+    <div class="project-info">
+      <span class="project-badge">Mémoire de recherche · Casablanca</span>
+      <h3 class="project-title">Évaluation de la rentabilité financière des supports publicitaires extérieurs à Casablanca selon le trafic routier et le profil socio-économique des zones</h3>
+      <p class="project-desc">
+        Face à l'émergence des technologies DOOH (Digital Out-Of-Home) et à la saturation visuelle croissante, ce PFE analyse comment le trafic routier et les caractéristiques socio-économiques influencent la rentabilité des panneaux publicitaires dans les grandes zones de Casablanca (Triangle d'Or, Axe Zerktouni, Sidi Maarouf, Hay Hassani…). Une matrice de décision pour le placement publicitaire a été construite à partir de capteurs de trafic et de données financières.
+      </p>
+      <div class="exp-tags" style="margin-top:1.5rem">
+        <span class="tag">DOOH</span>
+        <span class="tag">Finance</span>
+        <span class="tag">Casablanca</span>
+        <span class="tag">Data</span>
+        <span class="tag">Trafic routier</span>
+        <span class="tag">Rentabilité</span>
+      </div>
+    </div>
+    <div class="project-visual">
+      <div class="chart-container">
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;">Valeur publicitaire par zone</p>
+        <div class="chart-bar-group">
+          <div class="chart-label">Triangle d'Or / Anfa</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar"><div class="chart-bar-fill" data-width="95"></div></div>
+            <span class="chart-val">95%</span>
+          </div>
+        </div>
+        <div class="chart-bar-group">
+          <div class="chart-label">Axe Zerktouni / Moh.VI</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar"><div class="chart-bar-fill" data-width="82"></div></div>
+            <span class="chart-val">82%</span>
+          </div>
+        </div>
+        <div class="chart-bar-group">
+          <div class="chart-label">Pôle Sidi Maarouf</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar"><div class="chart-bar-fill" data-width="74"></div></div>
+            <span class="chart-val">74%</span>
+          </div>
+        </div>
+        <div class="chart-bar-group">
+          <div class="chart-label">Hay Hassani</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar"><div class="chart-bar-fill" data-width="61"></div></div>
+            <span class="chart-val">61%</span>
+          </div>
+        </div>
+        <div class="chart-bar-group">
+          <div class="chart-label">Ben Msick</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar"><div class="chart-bar-fill" data-width="48"></div></div>
+            <span class="chart-val">48%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Langues</h2>
+  </div>
+  <div class="lang-grid">
+    <div class="lang-card">
+      <div class="lang-name">Arabe</div>
+      <div class="lang-level">Langue maternelle</div>
+      <div class="lang-note">Darija marocain & arabe littéral</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">Français</div>
+      <div class="lang-level">Niveau C2 · TCF 611 pts</div>
+      <div class="lang-note">Maîtrise complète — Langue de travail et d'études</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">Anglais</div>
+      <div class="lang-level">Niveau professionnel</div>
+      <div class="lang-note">Lecture académique, communication business</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-content">
+    <div class="contact-headline">Travaillons<br>ensemble.</div>
+    <div class="contact-links">
+      <a href="mailto:elghali.sany@email.com" class="contact-link">✉ elghali.sany@email.com</a>
+      <a href="https://linkedin.com" class="contact-link">in LinkedIn</a>
+      <a href="#" class="contact-link">📍 France / Casablanca</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Elghali Sany — Tous droits réservés</span>
+  <span class="footer-copy">Master Achats & Supply Chain · Business Analysis</span>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        // Animate chart bars
+        el.target.querySelectorAll('.chart-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.exp-item, .skill-card, .lang-card').forEach(el => observer.observe(el));
+  document.querySelectorAll('.project-card').forEach(el => observer.observe(el));
+
+  // Also trigger chart bars on load if visible
+  document.querySelectorAll('.chart-bar-fill').forEach(bar => {
+    setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 800);
+  });
+</script>
+</body>
+</html>
