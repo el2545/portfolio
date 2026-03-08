@@ -964,7 +964,51 @@
         font-size: 0.86rem;
       }
     }
-
+/* ========== CONFIDENTIALITY ========== */
+.confidentiality {
+  background: var(--bg-alt);
+}
+.confidentiality .section-header__eyebrow {
+  color: var(--accent);
+}
+.confidentiality__card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  max-width: 800px;
+  margin: 0 auto;
+}
+.confidentiality__card p {
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.confidentiality__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.confidentiality__item {
+  position: relative;
+  padding-left: 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.confidentiality__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
     /* ========== CONTACT ========== */
     .contact {
       background: var(--primary);
@@ -2528,26 +2572,25 @@
     </section>
 
 
-    <!-- ========== CONFIDENTIALITY ========== -->
-    <section class="confidentiality" id="data-ethics" aria-label="Confidentialité et éthique des données">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__eyebrow" data-i18n="conf_eyebrow">Confidentialité</span>
-          <h2 class="section-header__title" data-i18n="conf_title">Data Ethics & Confidentiality</h2>
-          <p class="section-header__subtitle" data-i18n="conf_subtitle">Une partie essentielle de mon travail consiste à protéger la donnée, contextualiser les analyses et ne jamais exposer de livrables sensibles.</p>
-        </div>
-
-        <div class="confidentiality__card">
-          <p data-i18n="conf_intro">Les études de cas présentées dans ce portfolio reposent sur des données anonymisées, simulées, agrégées ou issues de sources publiques. Les noms d'entreprises sont mentionnés uniquement pour situer le contexte professionnel ou académique.</p>
-          <div class="confidentiality__list">
-            <p class="confidentiality__item" data-i18n="conf_item1">Aucune donnée client réelle, aucun email, identifiant personnel ou document interne n'est publié.</p>
-            <p class="confidentiality__item" data-i18n="conf_item2">Les chiffres financiers, KPI et modèles visibles ont été reconstruits ou partiellement modifiés à des fins de démonstration.</p>
-            <p class="confidentiality__item" data-i18n="conf_item3">Les projets géospatiaux et de simulation s'appuient sur des données ouvertes, des hypothèses de recherche et des flux synthétiques.</p>
-            <p class="confidentiality__item" data-i18n="conf_item4">Cette approche vise à respecter les standards de confidentialité, de protection des données et de secret des affaires attendus en finance, data et conseil.</p>
-          </div>
-        </div>
+<!-- ========== CONFIDENTIALITY ========== -->
+<section class="confidentiality" id="data-ethics" aria-label="Confidentialité et éthique des données">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__eyebrow" data-i18n="conf_eyebrow">Confidentialité</span>
+      <h2 class="section-header__title" data-i18n="conf_title">Data Ethics & Confidentiality</h2>
+      <p class="section-header__subtitle" data-i18n="conf_subtitle">Une partie essentielle de mon travail consiste à protéger la donnée, contextualiser les analyses et ne jamais exposer de livrables sensibles.</p>
+    </div>
+    <div class="confidentiality__card">
+      <p data-i18n="conf_intro">Les études de cas présentées dans ce portfolio reposent sur des données anonymisées, simulées, agrégées ou issues de sources publiques. Les noms d'entreprises sont mentionnés uniquement pour situer le contexte professionnel ou académique.</p>
+      <div class="confidentiality__list">
+        <p class="confidentiality__item" data-i18n="conf_item1">Aucune donnée client réelle, aucun email, identifiant personnel ou document interne n'est publié.</p>
+        <p class="confidentiality__item" data-i18n="conf_item2">Les chiffres financiers, KPI et modèles visibles ont été reconstruits ou partiellement modifiés à des fins de démonstration.</p>
+        <p class="confidentiality__item" data-i18n="conf_item3">Les projets géospatiaux et de simulation s'appuient sur des données ouvertes, des hypothèses de recherche et des flux synthétiques.</p>
+        <p class="confidentiality__item" data-i18n="conf_item4">Cette approche vise à respecter les standards de confidentialité, de protection des données et de secret des affaires attendus en finance, data et conseil.</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <!-- ========== CONTACT ========== -->
     <section class="contact" id="contact" aria-label="Contact">
@@ -2734,7 +2777,7 @@
   </script>
 
 
-  <!-- ========== i18n LANGUAGE SYSTEM ========== -->
+<!-- ========== i18n LANGUAGE SYSTEM ========== -->
   <script>
 
     // Toggle IRP extra rows (6-10)
@@ -2839,15 +2882,15 @@
         engage_item2_title: "Member — Cultural & Artistic Club (UIC)",
         engage_item2_desc: "Contributed to student life through the organization and promotion of cultural activities within the university.",
 
-        // Confidentiality
+        // Confidentiality (EN only)
         conf_eyebrow: "Confidentiality",
         conf_title: "Data Ethics & Confidentiality",
-        conf_subtitle: "Protecting data, contextualizing analysis and avoiding any exposure of sensitive deliverables are core parts of my work.",
-        conf_intro: "The case studies presented in this portfolio rely on anonymized, simulated, aggregated or publicly available datasets. Company names are mentioned only to indicate the professional or academic context.",
-        conf_item1: "No real client data, email addresses, personal identifiers or internal documents are published.",
-        conf_item2: "Visible financial figures, KPIs and models were reconstructed or partly modified for demonstration purposes.",
-        conf_item3: "Geospatial and simulation projects rely on open data, research assumptions and synthetic flows.",
-        conf_item4: "This approach is intended to respect confidentiality, data protection and trade secret standards expected in finance, data and consulting roles.",
+        conf_subtitle: "A core part of my work involves protecting data, contextualizing analyses, and never exposing sensitive deliverables.",
+        conf_intro: "The case studies presented in this portfolio rely on anonymized, simulated, aggregated, or publicly available data. Company names are mentioned solely to provide professional or academic context.",
+        conf_item1: "No real client data, emails, personal identifiers, or internal documents are published.",
+        conf_item2: "Financial figures, KPIs, and visible models have been reconstructed or partially modified for demonstration purposes.",
+        conf_item3: "Geospatial and simulation projects rely on open data, research assumptions, and synthetic flows.",
+        conf_item4: "This approach aims to uphold the standards of confidentiality, data protection, and trade secrecy expected in finance, data, and consulting.",
 
         // Contact
         contact_eyebrow: "Contact",
@@ -2861,7 +2904,6 @@
         mini_label: "Real-world deliverable",
         mini_title: "Analytical Performance Management — SAN MAROC",
         mini_text: "Specialized in amicable debt recovery, SAN MAROC operates in a 97.9 billion MAD non-performing loans market. As Business Analyst in the Financial Performance & Analytics unit, I designed the complete decision-support reporting system: portfolio segmentation by age and recovery probability, KPI monitoring (DSO, CEI, recovery rate), and VBA automation reducing production time by 2 hours per cycle.",
-        mini_m3: "Reduced average payment delay",
         mini_m1: "Per weekly cycle",
         mini_m2: "KPIs tracked",
         mini_m2v: "DSO, CEI",
@@ -2959,6 +3001,18 @@
         engage_item1_desc: "Participation aux initiatives de service communautaire et implication dans les programmes de développement du leadership.",
         engage_item2_title: "Membre — Club Culturel & Artistique (UIC)",
         engage_item2_desc: "Contribution à la vie étudiante par l'organisation et la promotion d'activités culturelles au sein de l'université.",
+
+        // Confidentialité (FR)
+        conf_eyebrow: "Confidentialité",
+        conf_title: "Éthique des Données & Confidentialité",
+        conf_subtitle: "Une part essentielle de mon travail consiste à protéger les données, contextualiser les analyses et ne jamais exposer de livrables sensibles.",
+        conf_intro: "Les études de cas présentées dans ce portfolio reposent sur des données anonymisées, simulées, agrégées ou publiquement accessibles. Les noms d'entreprises sont mentionnés uniquement pour fournir un contexte professionnel ou académique.",
+        conf_item1: "Aucune donnée client réelle, email, identifiant personnel ou document interne n'est publié.",
+        conf_item2: "Les chiffres financiers, KPIs et modèles visibles ont été reconstruits ou partiellement modifiés à des fins de démonstration.",
+        conf_item3: "Les projets géospatiaux et de simulation reposent sur des données ouvertes, des hypothèses de recherche et des flux synthétiques.",
+        conf_item4: "Cette démarche vise à respecter les standards de confidentialité, de protection des données et de secret des affaires attendus en finance, data et conseil.",
+
+        // Contact
         contact_eyebrow: "Contact",
         contact_title: "Travaillons ensemble",
         contact_subtitle: "Disponible pour échanger sur vos besoins en analyse financière, pilotage de performance ou data analytics.",
@@ -2969,7 +3023,6 @@
         mini_label: "Livrable en entreprise",
         mini_title: "Pilotage Analytique de la Performance — SAN MAROC",
         mini_text: "Cabinet spécialisé en recouvrement amiable, SAN MAROC opère sur un marché de 97,9 milliards de MAD de créances en souffrance. En tant que Business Analyst au sein du Pôle Analyse Financière & Performance, j'ai conçu le système de reporting décisionnel complet : segmentation des portefeuilles par ancienneté et probabilité de recouvrement, suivi des KPIs (DSO, CEI, taux de récupération), et automatisation VBA réduisant le temps de production de 2h par cycle.",
-        mini_m3: "Réduction délai moyen de paiement",
         mini_m1: "Par cycle hebdomadaire",
         mini_m2: "KPIs pilotés",
         mini_m2v: "DSO, CEI",
@@ -3399,8 +3452,7 @@
         });
       }
 
-      // Impact DOOH vs OOH table (table index 3) - already handled above
-      // but let's make sure "Référence" -> "Baseline" works
+      // Impact DOOH vs OOH table (table index 3)
       const impactT = document.querySelectorAll('.evidence-table')[3];
       if (impactT) {
         const rows = impactT.querySelectorAll('tbody tr');
