@@ -1523,6 +1523,68 @@
     .animate-delay-4 { animation-delay: 0.4s; }
 
     
+
+    .project-card__disclaimer {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: rgba(11,29,58,0.04);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .confidentiality {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .confidentiality__card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .confidentiality__list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 28px;
+      margin-top: 24px;
+    }
+
+    .confidentiality__item {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .confidentiality__item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .footer__disclaimer {
+      max-width: 760px;
+      margin: 0 auto 14px;
+      text-align: center;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.62);
+    }
+
     /* ========== PRINT ========== */
     @media print {
       .nav, .back-to-top, .skip-link, .lang-toggle,
@@ -1612,6 +1674,8 @@
       .contact__links { flex-direction: column; }
       .project-card { padding: 28px; }
       .proof__logos { gap: 28px; }
+      .confidentiality__list { grid-template-columns: 1fr; }
+      .confidentiality__card { padding: 28px; }
     }
   </style>
 </head>
@@ -1808,6 +1872,7 @@
             <span class="project-card__tag" data-i18n="p1_tag">Modélisation Financière</span>
             <h3 class="project-card__title" data-i18n="p1_title">Modélisation d'Investissement Publicitaire sur 5 ans (OOH vs DOOH)</h3>
             <p class="project-card__context" data-i18n="p1_context">Comparaison de la rentabilité financière entre affichage statique (OOH) et affichage numérique (DOOH) pour 2ACOM. Modèle Excel intégrant CAPEX, OPEX, amortissement et Total Cost of Ownership (TCO) sur 4 scénarios croisés.</p>
+            <p class="project-card__disclaimer" data-i18n="p1_disclaimer">Cas présenté à titre démonstratif. Les valeurs financières ont été reconstruites et partiellement anonymisées pour des raisons de confidentialité.</p>
 
             <p class="project-card__section-title" data-i18n-meth>Méthodologie</p>
             <div class="project-card__methods">
@@ -1944,6 +2009,7 @@
             <span class="project-card__tag" data-i18n="p2_tag">Simulation & Data Spatiale</span>
             <h3 class="project-card__title" data-i18n="p2_title">Simulation de Mobilité Urbaine et Analyse Spatiale (Casablanca)</h3>
             <p class="project-card__context" data-i18n="p2_context">Extraction du réseau routier via OpenStreetMap, simulation de trafic véhiculaire avec SUMO et cartographie des flux sur QGIS pour évaluer l'attractivité commerciale des axes publicitaires.</p>
+            <p class="project-card__disclaimer" data-i18n="p2_disclaimer">Sources utilisées : données ouvertes, simulations synthétiques et indicateurs agrégés. Aucune donnée personnelle ou trace individuelle n'est exposée.</p>
 
             <p class="project-card__section-title" data-i18n-meth>Méthodologie</p>
             <div class="project-card__methods">
@@ -2050,6 +2116,7 @@
             <span class="project-card__tag" data-i18n="p3_tag">Développement de KPI</span>
             <h3 class="project-card__title" data-i18n="p3_title">Indice de Rentabilité Potentielle (IRP)</h3>
             <p class="project-card__context" data-i18n="p3_context">Construction d'un indice multicritère pondéré (Audience 40 %, Coût CPM 30 %, Revenu ROAS 30 %) pour classer les 10 meilleurs emplacements publicitaires de Casablanca par rentabilité potentielle.</p>
+            <p class="project-card__disclaimer" data-i18n="p3_disclaimer">Indice reconstruit pour portfolio à partir de variables agrégées. Les pondérations et valeurs affichées ont une finalité pédagogique et démonstrative.</p>
 
             <p class="project-card__section-title" data-i18n-meth>Méthodologie</p>
             <div class="project-card__methods">
@@ -2213,10 +2280,10 @@
           <div class="mini-project__card">
             <div class="mini-project__content">
               <h3 class="mini-project__title" data-i18n="mini_title">Pilotage Analytique de la Performance — SAN MAROC</h3>
-              <p class="mini-project__text" data-i18n="mini_text">Cabinet spécialisé en recouvrement amiable, SAN MAROC opère sur un marché de 97,9 milliards de MAD de créances en souffrance. En tant que Business Analyst au sein du Pôle Analyse Financière & Performance, j'ai conçu le système de reporting décisionnel complet : segmentation des portefeuilles par ancienneté et probabilité de recouvrement, suivi des KPIs (DSO, CEI, taux de récupération), et automatisation VBA réduisant le temps de production de 2h par cycle.</p>
-              <a href="reporting_san_maroc .xlsx" download class="mini-project__download" data-i18n="mini_dl">
+              <p class="mini-project__text" data-i18n="mini_text">Exemple de livrable reconstitué à partir de missions de stage en analyse financière. La structure présentée illustre une logique de segmentation de portefeuilles, de suivi de KPIs (DSO, CEI, taux de récupération) et d'automatisation du reporting, sans reproduire un document interne d'entreprise.</p>
+              <a href="reporting_demo_portfolio.xlsx" download class="mini-project__download" data-i18n="mini_dl">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                Télécharger le template Excel du dashboard
+                Télécharger le dashboard Excel démo
               </a>
             </div>
             <div class="mini-project__metrics">
@@ -2287,7 +2354,7 @@
               <span class="dashboard-preview__dot"></span>
               <span class="dashboard-preview__dot" style="background:#FBBF24;"></span>
               <span class="dashboard-preview__dot" style="background:#34D399;"></span>
-              <span class="dashboard-preview__filename">reporting_san_maroc.xlsx — Dashboard Hebdo</span>
+              <span class="dashboard-preview__filename">dashboard_demo.xlsx — Weekly Dashboard Preview</span>
             </div>
             <div class="dashboard-preview__body">
               <!-- KPI Cards -->
@@ -2316,17 +2383,17 @@
               <!-- Mini table preview -->
               <div class="dp-table">
                 <div class="dp-row dp-row--header" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;">
-                  <span>Client</span><span>Encours</span><span>DSO</span><span>Score</span><span>Priorité</span>
+                  <span>Compte</span><span>Encours</span><span>DSO</span><span>Score</span><span>Priorité</span>
                 </div>
-                <div class="dp-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Fès Textile Export</span><span>680 000</span><span>28j</span><span>7.9</span><span class="dp-status dp-status--ok">Faible</span></div>
-                <div class="dp-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Tanger Med Services</span><span>1 178 000</span><span>32j</span><span>7.4</span><span class="dp-status dp-status--ok">Faible</span></div>
-                <div class="dp-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Ste Benomar Import-Export</span><span>2 437 000</span><span>43j</span><span>5.2</span><span class="dp-status dp-status--warn">Moyenne</span></div>
-                <div class="dp-row dp-row--fade" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Sté Lamrani & Fils</span><span>982 000</span><span>108j</span><span>4.4</span><span class="dp-status dp-status--alert">Haute</span></div>
-                <div class="dp-row dp-row--fade" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>+ 6 autres clients...</span><span></span><span></span><span></span><span></span></div>
+                <div class="dp-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Compte A</span><span>680 000</span><span>28j</span><span>7.9</span><span class="dp-status dp-status--ok">Faible</span></div>
+                <div class="dp-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Compte B</span><span>1 178 000</span><span>32j</span><span>7.4</span><span class="dp-status dp-status--ok">Faible</span></div>
+                <div class="dp-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Compte C</span><span>2 437 000</span><span>43j</span><span>5.2</span><span class="dp-status dp-status--warn">Moyenne</span></div>
+                <div class="dp-row dp-row--fade" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>Compte D</span><span>982 000</span><span>108j</span><span>4.4</span><span class="dp-status dp-status--alert">Haute</span></div>
+                <div class="dp-row dp-row--fade" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr 0.8fr;"><span>+ 6 autres comptes anonymisés...</span><span></span><span></span><span></span><span></span></div>
               </div>
             </div>
           </div>
-          <p class="mini-project__disclaimer" data-i18n="mini_disclaimer">* Données fictives — aucune donnée réelle de SAN MAROC n'a été utilisée.</p>
+          <p class="mini-project__disclaimer" data-i18n="mini_disclaimer">* Version démonstrative : données, noms et indicateurs reconstitués ou anonymisés. Aucun fichier interne ni donnée client réelle n'est diffusé.</p>
         </div>
 
       </div>
@@ -2460,6 +2527,28 @@
       </div>
     </section>
 
+
+    <!-- ========== CONFIDENTIALITY ========== -->
+    <section class="confidentiality" id="data-ethics" aria-label="Confidentialité et éthique des données">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__eyebrow" data-i18n="conf_eyebrow">Confidentialité</span>
+          <h2 class="section-header__title" data-i18n="conf_title">Data Ethics & Confidentiality</h2>
+          <p class="section-header__subtitle" data-i18n="conf_subtitle">Une partie essentielle de mon travail consiste à protéger la donnée, contextualiser les analyses et ne jamais exposer de livrables sensibles.</p>
+        </div>
+
+        <div class="confidentiality__card">
+          <p data-i18n="conf_intro">Les études de cas présentées dans ce portfolio reposent sur des données anonymisées, simulées, agrégées ou issues de sources publiques. Les noms d'entreprises sont mentionnés uniquement pour situer le contexte professionnel ou académique.</p>
+          <div class="confidentiality__list">
+            <p class="confidentiality__item" data-i18n="conf_item1">Aucune donnée client réelle, aucun email, identifiant personnel ou document interne n'est publié.</p>
+            <p class="confidentiality__item" data-i18n="conf_item2">Les chiffres financiers, KPI et modèles visibles ont été reconstruits ou partiellement modifiés à des fins de démonstration.</p>
+            <p class="confidentiality__item" data-i18n="conf_item3">Les projets géospatiaux et de simulation s'appuient sur des données ouvertes, des hypothèses de recherche et des flux synthétiques.</p>
+            <p class="confidentiality__item" data-i18n="conf_item4">Cette approche vise à respecter les standards de confidentialité, de protection des données et de secret des affaires attendus en finance, data et conseil.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== CONTACT ========== -->
     <section class="contact" id="contact" aria-label="Contact">
       <div class="container">
@@ -2512,6 +2601,7 @@
           <a href="https://www.linkedin.com/in/el-ghali-sany-589090251" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
+      <p class="footer__disclaimer" data-i18n="footer_disclaimer">Les cas, modèles et aperçus présentés sur ce site sont des versions démonstratives reconstruites. Aucune donnée confidentielle, client réel ou livrable interne n'est divulgué.</p>
       <p class="footer__copy" data-i18n="footer">&copy; 2026 El Ghali Sany — Portfolio professionnel</p>
     </div>
   </footer>
@@ -2701,15 +2791,18 @@
         p1_context: "Financial profitability comparison between static billboards (OOH) and digital displays (DOOH) for 2ACOM. Excel model integrating CAPEX, OPEX, depreciation and Total Cost of Ownership (TCO) across 4 cross-scenarios.",
         p1_results: "Results — 5-Year ROI Comparison",
         p1_tco: "TCO Structure & Depreciation",
+        p1_disclaimer: "Demonstration case. Financial values were reconstructed and partly anonymized for confidentiality reasons.",
         p2_tag: "Simulation & Spatial Data",
         p2_title: "Urban Mobility Simulation and Spatial Analysis (Casablanca)",
         p2_context: "Road network extraction via OpenStreetMap, vehicular traffic simulation with SUMO and QGIS flow mapping to assess commercial attractiveness of advertising corridors.",
         p2_zones: "Strategic zone profiling",
         p2_impact: "Measured impact — DOOH vs OOH (Sources: IPSOS, Nielsen, Clear Channel)",
+        p2_disclaimer: "Sources used: open datasets, synthetic simulations and aggregated indicators. No personal data or individual traces are exposed.",
         p3_tag: "KPI Development",
         p3_title: "Potential Profitability Index (PPI)",
         p3_context: "Construction of a weighted multi-criteria index (Audience 40%, CPM Cost 30%, ROAS Revenue 30%) to rank the top 10 advertising locations in Casablanca by potential profitability.",
         p3_ranking: "PPI Ranking — Top 10 Strategic Locations",
+        p3_disclaimer: "Index rebuilt for portfolio use from aggregated variables. The displayed weights and values serve a pedagogical and demonstrative purpose.",
         legend1: "<strong>OOH</strong> Traditional static billboards&ensp;·&ensp;<strong>DOOH</strong> Digital out-of-home displays",
         legend2: "<strong>Premium</strong> High-traffic location&ensp;·&ensp;<strong>Secondary</strong> Peripheral location",
 
@@ -2745,6 +2838,16 @@
         engage_item1_desc: "Participated in community service initiatives and contributed to leadership development programs.",
         engage_item2_title: "Member — Cultural & Artistic Club (UIC)",
         engage_item2_desc: "Contributed to student life through the organization and promotion of cultural activities within the university.",
+
+        // Confidentiality
+        conf_eyebrow: "Confidentiality",
+        conf_title: "Data Ethics & Confidentiality",
+        conf_subtitle: "Protecting data, contextualizing analysis and avoiding any exposure of sensitive deliverables are core parts of my work.",
+        conf_intro: "The case studies presented in this portfolio rely on anonymized, simulated, aggregated or publicly available datasets. Company names are mentioned only to indicate the professional or academic context.",
+        conf_item1: "No real client data, email addresses, personal identifiers or internal documents are published.",
+        conf_item2: "Visible financial figures, KPIs and models were reconstructed or partly modified for demonstration purposes.",
+        conf_item3: "Geospatial and simulation projects rely on open data, research assumptions and synthetic flows.",
+        conf_item4: "This approach is intended to respect confidentiality, data protection and trade secret standards expected in finance, data and consulting roles.",
 
         // Contact
         contact_eyebrow: "Contact",
@@ -2817,15 +2920,18 @@
         p1_context: "Comparaison de la rentabilité financière entre affichage statique (OOH) et affichage numérique (DOOH) pour 2ACOM. Modèle Excel intégrant CAPEX, OPEX, amortissement et Total Cost of Ownership (TCO) sur 4 scénarios croisés.",
         p1_results: "Résultats — Comparaison ROI sur 5 ans",
         p1_tco: "Structure TCO & Amortissement",
+        p1_disclaimer: "Cas présenté à titre démonstratif. Les valeurs financières ont été reconstruites et partiellement anonymisées pour des raisons de confidentialité.",
         p2_tag: "Simulation & Data Spatiale",
         p2_title: "Simulation de Mobilité Urbaine et Analyse Spatiale (Casablanca)",
         p2_context: "Extraction du réseau routier via OpenStreetMap, simulation de trafic véhiculaire avec SUMO et cartographie des flux sur QGIS pour évaluer l'attractivité commerciale des axes publicitaires.",
         p2_zones: "Profilage des zones stratégiques analysées",
         p2_impact: "Impact mesuré — DOOH vs OOH (Sources: IPSOS, Nielsen, Clear Channel)",
+        p2_disclaimer: "Sources utilisées : données ouvertes, simulations synthétiques et indicateurs agrégés. Aucune donnée personnelle ou trace individuelle n'est exposée.",
         p3_tag: "Développement de KPI",
         p3_title: "Indice de Rentabilité Potentielle (IRP)",
         p3_context: "Construction d'un indice multicritère pondéré (Audience 40 %, Coût CPM 30 %, Revenu ROAS 30 %) pour classer les 10 meilleurs emplacements publicitaires de Casablanca par rentabilité potentielle.",
         p3_ranking: "Classement IRP — Top 10 Emplacements Stratégiques",
+        p3_disclaimer: "Indice reconstruit pour portfolio à partir de variables agrégées. Les pondérations et valeurs affichées ont une finalité pédagogique et démonstrative.",
         legend1: "<strong>OOH</strong> Affichage statique traditionnel&ensp;·&ensp;<strong>DOOH</strong> Affichage numérique digital",
         legend2: "<strong>Premium</strong> Emplacement à fort trafic&ensp;·&ensp;<strong>Secondaire</strong> Emplacement périphérique",
         skills_eyebrow: "Compétences",
@@ -2857,6 +2963,7 @@
         contact_title: "Travaillons ensemble",
         contact_subtitle: "Disponible pour échanger sur vos besoins en analyse financière, pilotage de performance ou data analytics.",
         contact_avail: "Disponible en alternance dès septembre 2026",
+        footer_disclaimer: "Les cas, modèles et aperçus présentés sur ce site sont des versions démonstratives reconstruites. Aucune donnée confidentielle, client réel ou livrable interne n'est divulgué.",
         footer: "&copy; 2026 El Ghali Sany — Portfolio professionnel",
         pfe_link: "Consulter l'étude complète (PDF)",
         mini_label: "Livrable en entreprise",
@@ -2868,7 +2975,7 @@
         mini_m2v: "DSO, CEI",
         mini_m3v: "97.9 Mds",
         mini_m3: "Marché créances (MAD)",
-        mini_dl: "Télécharger le template Excel du dashboard",
+        mini_dl: "Télécharger le dashboard Excel démo",
         mini_disclaimer: "* Données fictives — aucune donnée réelle de SAN MAROC n'a été utilisée.",
 
         // Dates & locations
