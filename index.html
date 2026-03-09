@@ -1629,10 +1629,13 @@
       color: rgba(255,255,255,0.62);
     }
 
-/* ========== PRINT ========== */
 @media print {
 
-  /* 1. Nettoyage UI */
+  @page {
+    size: A4 portrait;
+    margin: 1.2cm;
+  }
+
   .nav,
   .back-to-top,
   .skip-link,
@@ -1649,11 +1652,10 @@
   *::after {
     animation: none !important;
     transition: none !important;
-    text-shadow: none !important;
     box-shadow: none !important;
+    text-shadow: none !important;
   }
 
-  /* 2. Mode impression propre */
   html,
   body,
   main,
@@ -1664,82 +1666,40 @@
   .edu-card,
   .lang-card,
   .exp-card,
-  .confidentiality__card,
   .contact,
   .footer {
     background: #fff !important;
     color: #000 !important;
+    min-height: auto !important;
+    height: auto !important;
   }
 
-  h1, h2, h3, h4, h5, h6,
-  p, li, span, td, th, label,
-  .skill-badge,
-  .method-pill,
-  .contact__link,
-  .contact__availability,
-  .section-header__title,
-  .section-header__subtitle {
-    color: #000 !important;
-  }
-
-  img {
-    filter: grayscale(100%) !important;
-    max-width: 100% !important;
-  }
-
-  /* 3. Liens visibles sur papier */
-  a[href^="http"]::after,
-  a[href^="https"]::after,
-  a[href^="mailto:"]::after,
-  a[href^="tel:"]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.75em;
-    font-weight: normal;
-    font-style: italic;
-    color: #444 !important;
-    word-break: break-all;
-  }
-
-  a[href^="#"]::after,
-  a[href^="javascript"]::after,
-  .nav a::after {
-    content: "" !important;
-  }
-
-  /* 4. Mise en page */
   body {
-    font-size: 11pt;
-    line-height: 1.5;
-    orphans: 3;
-    widows: 3;
+    font-size: 10.5pt !important;
+    line-height: 1.35 !important;
     background: #fff !important;
     color: #000 !important;
   }
 
   .container {
-    max-width: 100%;
-    padding: 0 20px;
+    max-width: 100% !important;
+    padding: 0 16px !important;
   }
 
   section {
-    padding: 32px 0;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  h1, h2, h3 {
-    page-break-after: avoid;
-    break-after: avoid;
+    padding: 12pt 0 !important;
+    margin: 0 !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
 
   .project-card,
   .skills__category,
   .edu-card,
   .lang-card,
-  .exp-card,
-  .confidentiality__card {
-    page-break-inside: avoid;
-    break-inside: avoid;
+  .exp-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
     border: 1px solid #ddd !important;
   }
 
@@ -1748,10 +1708,13 @@
     transform: none !important;
   }
 
-  /* 5. Hero */
-  .hero {
-    padding-top: 40px;
-    padding-bottom: 40px;
+  .hero,
+  .hero__grid {
+    display: block !important;
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 12pt !important;
+    padding-bottom: 12pt !important;
   }
 
   .hero::before,
@@ -1763,21 +1726,19 @@
     border: 1px solid #ccc !important;
   }
 
-  .hero__grid {
-    grid-template-columns: 1fr 200px;
-    gap: 24px;
+  .proof {
+    padding: 10pt 0 !important;
   }
 
-  /* 6. Proof / contact / footer */
-  .proof {
-    padding: 16px 0;
+  .contact {
+    background: #fff !important;
+    color: #000 !important;
   }
 
   .contact .section-header__title,
   .contact .section-header__subtitle,
   .contact__link,
-  .contact__availability,
-  .footer {
+  .contact__availability {
     color: #000 !important;
   }
 
@@ -1791,13 +1752,8 @@
     background: #000 !important;
   }
 
-  .footer {
-    border-top: 1px solid #ddd;
-  }
-
-  /* 7. Evidence tables */
   .evidence-details {
-    display: block;
+    display: block !important;
   }
 
   .evidence-details > .evidence-table-wrap {
@@ -1805,23 +1761,60 @@
   }
 
   .evidence-summary {
-    display: block;
-    font-size: 0.78rem;
-    margin-bottom: 8px;
+    display: block !important;
+    font-size: 0.78rem !important;
+    margin-bottom: 8px !important;
   }
 
   .evidence-summary::after {
-    display: none;
+    display: none !important;
   }
 
   .irp-extra-row {
     display: table-row !important;
   }
 
-  /* 8. Page */
-  @page {
-    margin: 1.5cm;
-    size: A4 portrait;
+  .footer {
+    background: #fff !important;
+    color: #666 !important;
+    border-top: 1px solid #ddd !important;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  p, li, table, tr, td, th {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    filter: grayscale(100%) !important;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+
+  a[href^="http"]::after,
+  a[href^="https"]::after,
+  a[href^="mailto"]::after,
+  a[href^="tel"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666 !important;
+    word-break: break-all;
+  }
+
+  a[href^="#"]::after,
+  a[href^="javascript"]::after,
+  .nav a::after {
+    content: "" !important;
   }
 }
     /* ========== RESPONSIVE ========== */
