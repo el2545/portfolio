@@ -1629,150 +1629,201 @@
       color: rgba(255,255,255,0.62);
     }
 
-    /* ========== PRINT ========== */
-    @media print {
-         /* 1) Nettoyage UI — Zéro bruit */
-      header,
-      nav,
-      footer,
-      .nav,
-      .footer,
-      .back-to-top,
-      .skip-link,
-      .lang-toggle,
-      .nav__cta,
-      .btn-icon,
-      .irp-toggle-btn,
-      .nav__toggle,
-      .floating-contact,
-      .btn-floating,
-      .cookie-banner,
-      .chat-widget {
-        display: none !important;
-      }
+/* ========== PRINT ========== */
+@media print {
 
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-     /* 2) Mode Save Ink */
-      html,
-      body,
-      main,
-      section,
-      .card,
-      .container,
-      .project-card,
-      .case-study,
-      .skills__category,
-      .edu-card,
-      .lang-card,
-      .exp-card,
-      .contact,
-      .confidentiality,
-      .confidentiality__card {
-        background: #fff !important;
-        color: #000 !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-      }
-           h1, h2, h3, h4, h5, h6,
-      p, li, span, td, th, label,
-      .badge, .tag, .skill-item {
-        color: #000 !important;
-      }
+  /* 1. Nettoyage UI */
+  .nav,
+  .back-to-top,
+  .skip-link,
+  .lang-toggle,
+  .nav__cta,
+  .btn-icon,
+  .irp-toggle-btn,
+  .nav__toggle {
+    display: none !important;
+  }
 
-      img {
-        filter: grayscale(100%) !important;
-        max-width: 100% !important;
-      }
-  /* 3) Révélation des liens externes */
-      a[href^="http"]::after,
-      a[href^="https"]::after,
-      a[href^="mailto"]::after,
-      a[href^="tel"]::after {
-        content: " (" attr(href) ")";
-        font-size: 0.75em;
-        font-weight: normal;
-        font-style: italic;
-        color: #444 !important;
-        word-break: break-all;
-      }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
 
-       a[href^="#"]::after,
-      a[href^="javascript"]::after,
-      nav a::after,
-      .social-icon::after {
-        content: "" !important;
-      }
-/* 4) Gestion des sauts de page */
-      .project-card,
-      .case-study,
-      .card,
-      section,
-      .skills__category,
-      .edu-card,
-      .lang-card,
-      .exp-card,
-      .confidentiality__card {
-        page-break-inside: avoid;
-        break-inside: avoid;
-        h1,
-      h2,
-      h3 {
-        page-break-after: avoid;
-        break-after: avoid;
-      }
-          .container {
-        max-width: 100%;
-        padding: 0 20px;
-      }
+  /* 2. Mode impression propre */
+  html,
+  body,
+  main,
+  section,
+  .container,
+  .project-card,
+  .skills__category,
+  .edu-card,
+  .lang-card,
+  .exp-card,
+  .confidentiality__card,
+  .contact,
+  .footer {
+    background: #fff !important;
+    color: #000 !important;
+  }
 
-      .hero {
-        padding-top: 40px;
-        padding-bottom: 40px;
-      }
+  h1, h2, h3, h4, h5, h6,
+  p, li, span, td, th, label,
+  .skill-badge,
+  .method-pill,
+  .contact__link,
+  .contact__availability,
+  .section-header__title,
+  .section-header__subtitle {
+    color: #000 !important;
+  }
 
-      .hero::before,
-      .hero__photo-wrapper::before {
-        display: none;
-      }
+  img {
+    filter: grayscale(100%) !important;
+    max-width: 100% !important;
+  }
 
-      .hero__photo-frame {
-        box-shadow: none;
-        border: 1px solid #ccc;
-      }
+  /* 3. Liens visibles sur papier */
+  a[href^="http"]::after,
+  a[href^="https"]::after,
+  a[href^="mailto:"]::after,
+  a[href^="tel:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    font-weight: normal;
+    font-style: italic;
+    color: #444 !important;
+    word-break: break-all;
+  }
 
-      .hero__grid {
-        grid-template-columns: 1fr 200px;
-        gap: 24px;
-      }
+  a[href^="#"]::after,
+  a[href^="javascript"]::after,
+  .nav a::after {
+    content: "" !important;
+  }
 
-      .evidence-details { display: block; }
-      .evidence-details > .evidence-table-wrap { display: block !important; }
-    .evidence-summary {
-        display: block;
-        font-size: 0.78rem;
-        margin-bottom: 8px;
-      }
-      .evidence-summary::after { display: none; }
-      .irp-extra-row { display: table-row !important; }
+  /* 4. Mise en page */
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+    orphans: 3;
+    widows: 3;
+    background: #fff !important;
+    color: #000 !important;
+  }
 
-  /* 5) Confort d'impression */
-      @page {
-        margin: 1.5cm;
-        size: A4 portrait;
-      }
-          body {
-        font-size: 11pt;
-        line-height: 1.5;
-        orphans: 3;
-        widows: 3;
-      }
-    }
+  .container {
+    max-width: 100%;
+    padding: 0 20px;
+  }
 
+  section {
+    padding: 32px 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .project-card,
+  .skills__category,
+  .edu-card,
+  .lang-card,
+  .exp-card,
+  .confidentiality__card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #ddd !important;
+  }
+
+  .project-card:hover,
+  .skill-badge:hover {
+    transform: none !important;
+  }
+
+  /* 5. Hero */
+  .hero {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .hero::before,
+  .hero__photo-wrapper::before {
+    display: none !important;
+  }
+
+  .hero__photo-frame {
+    border: 1px solid #ccc !important;
+  }
+
+  .hero__grid {
+    grid-template-columns: 1fr 200px;
+    gap: 24px;
+  }
+
+  /* 6. Proof / contact / footer */
+  .proof {
+    padding: 16px 0;
+  }
+
+  .contact .section-header__title,
+  .contact .section-header__subtitle,
+  .contact__link,
+  .contact__availability,
+  .footer {
+    color: #000 !important;
+  }
+
+  .contact__link,
+  .contact__availability {
+    border-color: #ccc !important;
+    background: #f5f5f5 !important;
+  }
+
+  .contact__availability::before {
+    background: #000 !important;
+  }
+
+  .footer {
+    border-top: 1px solid #ddd;
+  }
+
+  /* 7. Evidence tables */
+  .evidence-details {
+    display: block;
+  }
+
+  .evidence-details > .evidence-table-wrap {
+    display: block !important;
+  }
+
+  .evidence-summary {
+    display: block;
+    font-size: 0.78rem;
+    margin-bottom: 8px;
+  }
+
+  .evidence-summary::after {
+    display: none;
+  }
+
+  .irp-extra-row {
+    display: table-row !important;
+  }
+
+  /* 8. Page */
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+}
     /* ========== RESPONSIVE ========== */
     @media (max-width: 960px) {
       .hero__grid {
