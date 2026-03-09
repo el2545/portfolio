@@ -1955,7 +1955,27 @@
   a[href^="javascript"]::after {
     content: "" !important;
   }
+    /* Force visible all animated content in print */
+.animate-in,
+.animate-on-scroll,
+.section-header,
+.exp-card,
+.project-card,
+.skills__category,
+.edu-card,
+.lang-card,
+.contact__link,
+.hero__eyebrow,
+.hero__name,
+.hero__subtitle,
+.hero__buttons,
+.hero__photo-wrapper {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
 }
+    }
     /* ========== RESPONSIVE ========== */
     @media (max-width: 960px) {
       .hero__grid {
@@ -2924,6 +2944,16 @@
 
   <!-- ========== SCROLL ANIMATIONS ========== -->
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEventListener('beforeprint', () => {
+  document.querySelectorAll(
+    '.animate-in, .animate-on-scroll, .section-header, .exp-card, .project-card, .skills__category, .edu-card, .lang-card, .contact__link, .hero__eyebrow, .hero__name, .hero__subtitle, .hero__buttons, .hero__photo-wrapper'
+  ).forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    el.style.animation = 'none';
+    el.style.transition = 'none';
+  });
+});
     // ======================================
     // SCROLL ANIMATIONS — Staggered reveal
     // ======================================
