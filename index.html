@@ -26,6 +26,8 @@
   <meta name="twitter:title" content="El Ghali Sany — Financial Data Scientist / Analyste Quant | Portfolio">
   <meta name="twitter:description" content="Financial Data Scientist / Analyste Quant. Python, ML, trading algorithmique. ROI 533%, 15+ variables, 3 expériences Finance/Data.">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1628,6 +1630,357 @@
       color: rgba(255,255,255,0.62);
     }
 
+
+
+    /* ========== SMART CITY / LEAFLET-SUMO / AI-MCDM ADDITIONS ========== */
+    :root { --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+    .smartlab {
+      background: linear-gradient(180deg, var(--bg-alt) 0%, #fff 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .smartlab--mcdm { background: #fff; }
+    .smartlab-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .smartlab-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .smartlab-card--dark {
+      background: var(--primary);
+      color: #fff;
+      border-color: rgba(255,255,255,.12);
+    }
+    .smartlab-card h3 {
+      font-family: var(--font-display);
+      color: var(--primary);
+      font-size: 1.45rem;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .smartlab-card--dark h3 { color: #fff; }
+    .smartlab-card p {
+      color: var(--text-muted);
+      line-height: 1.75;
+      font-size: .98rem;
+    }
+    .smartlab-card--dark p { color: rgba(255,255,255,.72); }
+    .smartlab-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .smartlab-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 100px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: .78rem;
+      font-weight: 600;
+    }
+    .smartlab-card--dark .smartlab-tag {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+      color: rgba(255,255,255,.86);
+    }
+    .smartlab-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .smartlab-kpi {
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .smartlab-kpi strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      color: #fff;
+      line-height: 1;
+    }
+    .smartlab-kpi span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255,255,255,.68);
+      font-size: .76rem;
+      line-height: 1.35;
+    }
+    .smartlab-note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(11,29,58,.035);
+      color: var(--text-muted);
+      font-size: .86rem;
+      line-height: 1.7;
+    }
+    .smartlab-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .smartlab-link:hover { color: var(--accent); }
+
+    /* Leaflet/SUMO dashboard */
+    .egs-sumo-shell {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(11,29,58,.18);
+      background: #050807;
+      color: #E8FCEE;
+      box-shadow: var(--shadow-lg);
+      font-family: var(--font-mono);
+    }
+    .egs-sumo-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px;
+      border-bottom: 1px solid rgba(0,255,136,.22);
+      background: #071107;
+    }
+    .egs-mode-btn, .egs-zone-btn, .egs-control-btn {
+      border: 1px solid rgba(0,255,136,.28);
+      background: #101b10;
+      color: #7db58b;
+      border-radius: 5px;
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      cursor: pointer;
+      line-height: 1.15;
+      transition: var(--transition);
+    }
+    .egs-mode-btn:hover, .egs-zone-btn:hover, .egs-control-btn:hover {
+      color: #00FF88;
+      border-color: #00AA55;
+    }
+    .egs-mode-btn.active, .egs-zone-btn.active {
+      background: rgba(0,255,136,.12);
+      color: var(--tc, #00FF88);
+      border-color: var(--tc, #00FF88);
+      box-shadow: inset 0 -2px 0 var(--tc, #00FF88);
+    }
+    .egs-sumo-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) 240px;
+      min-height: 460px;
+    }
+    .egs-map-wrap { position: relative; min-height: 460px; background: #0A0A0A; }
+    #egsSumoMap { position:absolute; inset:0; z-index:1; min-height:460px; }
+    #egsTrafficCanvas { position:absolute; inset:0; z-index:500; width:100%; height:100%; pointer-events:none; }
+    .egs-map-badge {
+      position: absolute;
+      z-index: 700;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      max-width: 410px;
+      background: rgba(0,10,0,.84);
+      border: 1px solid rgba(0,255,136,.22);
+      border-radius: 8px;
+      padding: 9px 11px;
+      color: #00FF88;
+      pointer-events: none;
+    }
+    .egs-map-badge strong { display:block; font-size: 12px; margin-bottom: 3px; }
+    .egs-map-badge span { display:block; font-size: 10px; color:#93b795; line-height:1.4; }
+    .egs-legend {
+      position: absolute;
+      z-index: 700;
+      left: 12px;
+      bottom: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      background: rgba(0,10,0,.84);
+      border: 1px solid rgba(0,255,136,.22);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 10px;
+      color:#93b795;
+      pointer-events:none;
+    }
+    .egs-dot { display:inline-block; width:10px; height:10px; border-radius:99px; margin-right:4px; vertical-align:-1px; }
+    .egs-dot.green { background:#00FF88; }
+    .egs-dot.yellow { background:#FFD700; }
+    .egs-dot.red { background:#FF3355; }
+    .egs-side {
+      background: #050807;
+      border-left: 1px solid rgba(0,255,136,.22);
+      display:flex;
+      flex-direction:column;
+    }
+    .egs-kpis {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      border-bottom:1px solid rgba(0,255,136,.22);
+    }
+    .egs-kpi { padding:10px 7px; border-right:1px solid rgba(0,255,136,.22); border-bottom:1px solid rgba(0,255,136,.22); text-align:center; }
+    .egs-kpi:nth-child(2n) { border-right:none; }
+    .egs-kpi-label { color:#5a805f; font-size:8px; margin-bottom:4px; }
+    .egs-kpi-val { color:#00FF88; font-size:18px; font-weight:700; line-height:1; }
+    .egs-controls { padding:10px; border-bottom:1px solid rgba(0,255,136,.22); }
+    .egs-control-row { margin-bottom:9px; }
+    .egs-control-row label { display:block; color:#7da77d; font-size:9px; margin-bottom:4px; }
+    .egs-control-row input[type="range"] { width:100%; accent-color:#00FF88; }
+    .egs-control-buttons { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:9px; }
+    .egs-note { padding:10px; color:#8aac8a; font-size:10px; line-height:1.55; overflow-y:auto; }
+    .egs-hidden { display:none !important; }
+    .egs-link-row { display:flex; gap:5px; flex-wrap:wrap; padding:8px 10px; border-top:1px solid rgba(0,255,136,.22); margin-top:auto; }
+    .egs-small-tag { border:1px solid rgba(0,255,136,.22); color:#7da77d; padding:3px 7px; border-radius:4px; font-size:8px; }
+
+    /* AI-MCDM section */
+    .mcdm-architecture {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .mcdm-layer {
+      position: relative;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      min-height: 185px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .mcdm-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .mcdm-layer small {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: .68rem;
+    }
+    .mcdm-layer h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .mcdm-layer p {
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-size: .9rem;
+    }
+    .mcdm-lab {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 18px;
+      align-items: start;
+      margin-top: 18px;
+    }
+    .mcdm-controls, .mcdm-ranking {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+    }
+    .mcdm-control { margin-bottom: 18px; }
+    .mcdm-control label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .mcdm-control output { color: var(--accent); }
+    .mcdm-control input[type="range"] { width:100%; accent-color: var(--accent); }
+    .mcdm-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mcdm-row:last-child { border-bottom: none; }
+    .mcdm-rank {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+    .mcdm-name { font-weight: 700; color: var(--primary); }
+    .mcdm-meta { display:block; color: var(--text-muted); font-size:.78rem; font-weight:500; margin-top:2px; }
+    .mcdm-score {
+      min-width: 60px;
+      text-align: right;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .mcdm-bar {
+      grid-column: 2 / 4;
+      height: 6px;
+      background: rgba(11,29,58,.08);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: -4px;
+    }
+    .mcdm-bar span {
+      display: block;
+      height: 100%;
+      width: var(--w,50%);
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: inherit;
+      transition: width .25s ease;
+    }
+
+    @media (max-width: 960px) {
+      .smartlab-grid, .mcdm-lab { grid-template-columns: 1fr; }
+      .mcdm-architecture { grid-template-columns: repeat(2,1fr); }
+      .egs-sumo-grid { grid-template-columns: 1fr; }
+      .egs-side { border-left: none; border-top: 1px solid rgba(0,255,136,.22); }
+      .egs-map-wrap, #egsSumoMap { min-height: 380px; }
+    }
+    @media (max-width: 640px) {
+      .smartlab-kpi-grid, .mcdm-architecture { grid-template-columns: 1fr; }
+      .smartlab-card { padding: 22px; }
+      .mcdm-row { grid-template-columns: auto 1fr; }
+      .mcdm-score { grid-column: 2; text-align: left; }
+      .mcdm-bar { grid-column: 1 / 3; }
+    }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 960px) {
       .hero__grid {
@@ -1696,6 +2049,8 @@
         <li><a href="#about" data-i18n="nav_about">À propos</a></li>
         <li><a href="#experiences" data-i18n="nav_exp">Expériences</a></li>
         <li><a href="#projects" data-i18n="nav_proj">Projets</a></li>
+        <li><a href="#sumo-lab" data-i18n="nav_sumo">SUMO Lab</a></li>
+        <li><a href="#ai-mcdm" data-i18n="nav_mcdm">AI-MCDM</a></li>
         <li><a href="#engagements" data-i18n="nav_engage">Engagements</a></li>
         <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
         <li>
@@ -2388,6 +2743,178 @@
       </div>
     </section>
 
+
+
+    <!-- ========== LEAFLET / SUMO TRAFFIC LAB ========== -->
+    <section class="smartlab smartlab--sumo" id="sumo-lab" aria-label="Leaflet SUMO Traffic Lab">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__eyebrow" data-i18n="sumo_eyebrow">Urban Intelligence</span>
+          <h2 class="section-header__title" data-i18n="sumo_title">Leaflet/SUMO Traffic Lab</h2>
+          <p class="section-header__subtitle" data-i18n="sumo_subtitle">Une interface interactive qui relie simulation SUMO, carte Leaflet et lecture financière des emplacements urbains.</p>
+        </div>
+
+        <div class="smartlab-grid">
+          <div class="smartlab-card">
+            <h3 data-i18n="sumo_card_title">Pourquoi cette partie renforce le portfolio</h3>
+            <p data-i18n="sumo_card_text">Elle transforme un projet académique en démonstrateur visuel : le recruteur voit directement la capacité à connecter données géospatiales, flux de mobilité, KPIs et décision d’investissement.</p>
+            <div class="smartlab-tags" aria-label="SUMO technical stack">
+              <span class="smartlab-tag">Leaflet.js 1.9.4</span>
+              <span class="smartlab-tag">leaflet.heat</span>
+              <span class="smartlab-tag">SUMO FCD</span>
+              <span class="smartlab-tag">OpenStreetMap</span>
+              <span class="smartlab-tag">QGIS</span>
+              <span class="smartlab-tag">CAPEX / OPEX</span>
+            </div>
+          </div>
+          <div class="smartlab-card smartlab-card--dark">
+            <h3 data-i18n="sumo_metrics_title">Ce que le lab montre</h3>
+            <p data-i18n="sumo_metrics_text">Le module affiche les zones, la densité de trafic, les véhicules simulés et les indicateurs utiles pour relier attractivité commerciale et rentabilité potentielle.</p>
+            <div class="smartlab-kpi-grid">
+              <div class="smartlab-kpi"><strong>5</strong><span data-i18n="sumo_kpi1">zones Casablanca</span></div>
+              <div class="smartlab-kpi"><strong>2</strong><span data-i18n="sumo_kpi2">modes : heatmap / simulation</span></div>
+              <div class="smartlab-kpi"><strong>JSON</strong><span data-i18n="sumo_kpi3">données SUMO prêtes à charger</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="egs-sumo-shell" id="sumo-dashboard">
+          <div class="egs-sumo-toolbar" aria-label="SUMO dashboard modes">
+            <button aria-label="View traffic density heatmap" class="egs-mode-btn active" data-egs-mode="heatmap" type="button">HEATMAP</button>
+            <button aria-label="View real-time vehicle simulation" class="egs-mode-btn" data-egs-mode="simulation" type="button">SIMULATION</button>
+          </div>
+          <div class="egs-sumo-toolbar" aria-label="SUMO zones">
+            <button aria-label="View Maârif district traffic data" class="egs-zone-btn active" data-egs-zone="maarif" style="--tc:#FF3355;" type="button">Maârif</button>
+            <button aria-label="View Hay Hassani district traffic data" class="egs-zone-btn" data-egs-zone="hay_hassani" style="--tc:#FFB830;" type="button">Hay Hassani</button>
+            <button aria-label="View Ben M'Sick district traffic data" class="egs-zone-btn" data-egs-zone="ben_msick" style="--tc:#00E676;" type="button">Ben M'Sick</button>
+            <button aria-label="View Sidi Maârouf district traffic data" class="egs-zone-btn" data-egs-zone="sidi_maarouf" style="--tc:#BF5AF2;" type="button">Sidi Maârouf</button>
+            <button aria-label="View Boulevard Mohammed V traffic data" class="egs-zone-btn" data-egs-zone="bd_mohammed_v" style="--tc:#00B4D8;" type="button">Bd. Mohammed V</button>
+          </div>
+          <div class="egs-sumo-grid">
+            <div class="egs-map-wrap">
+              <div id="egsSumoMap"></div>
+              <canvas id="egsTrafficCanvas"></canvas>
+              <div class="egs-map-badge">
+                <strong id="egsZoneTitle">Maârif</strong>
+                <span id="egsStatusText">Loading SUMO heatmap...</span>
+              </div>
+              <div class="egs-legend" id="egsHeatLegend">
+                <div><span class="egs-dot green"></span>Low concentration</div>
+                <div><span class="egs-dot yellow"></span>Medium</div>
+                <div><span class="egs-dot red"></span>High</div>
+              </div>
+              <div class="egs-legend egs-hidden" id="egsSimulationLegend">
+                <div><span class="egs-dot red"></span>Slow</div>
+                <div><span class="egs-dot yellow"></span>Medium</div>
+                <div><span class="egs-dot green"></span>Fast</div>
+              </div>
+            </div>
+            <div class="egs-side">
+              <div class="egs-kpis">
+                <div class="egs-kpi"><div class="egs-kpi-label" id="egsMainLabel">POINTS</div><div class="egs-kpi-val" id="egsKpiMain">—</div></div>
+                <div class="egs-kpi"><div class="egs-kpi-label">VEHICLES</div><div class="egs-kpi-val" id="egsKpiVehicles">—</div></div>
+                <div class="egs-kpi"><div class="egs-kpi-label">STEPS</div><div class="egs-kpi-val" id="egsKpiSteps">—</div></div>
+                <div class="egs-kpi"><div class="egs-kpi-label">AVG SPEED</div><div class="egs-kpi-val" id="egsKpiSpeed">—</div></div>
+              </div>
+              <div class="egs-controls" id="egsHeatControls">
+                <div class="egs-control-row"><label for="egsRadiusRange">Heat radius</label><input id="egsRadiusRange" max="30" min="4" type="range" value="10"></div>
+                <div class="egs-control-row"><label for="egsBlurRange">Blur</label><input id="egsBlurRange" max="30" min="3" type="range" value="8"></div>
+                <div class="egs-control-row"><label for="egsIntensityRange">Intensity</label><input id="egsIntensityRange" max="10" min="1" type="range" value="3"></div>
+                <button class="egs-control-btn" id="egsResetHeatmapBtn" type="button">Recenter</button>
+              </div>
+              <div class="egs-controls egs-hidden" id="egsSimulationControls">
+                <div class="egs-control-buttons">
+                  <button class="egs-control-btn" id="egsPlayBtn" type="button">Play</button>
+                  <button class="egs-control-btn" id="egsPauseBtn" type="button">Pause</button>
+                  <button class="egs-control-btn" id="egsRestartBtn" type="button">Restart</button>
+                  <button class="egs-control-btn" id="egsResetSimulationBtn" type="button">Recenter</button>
+                </div>
+                <div class="egs-control-row"><label for="egsSpeedRange">Animation speed</label><input id="egsSpeedRange" max="12" min="1" type="range" value="6"></div>
+                <div class="egs-control-row"><label for="egsVehicleSizeRange">Vehicle size</label><input id="egsVehicleSizeRange" max="10" min="2" type="range" value="6"></div>
+              </div>
+              <div class="egs-note" id="egsAnalysisText">Heatmap based on geo-corrected SUMO FCD outputs. Switch to Simulation to display vehicles step-by-step.</div>
+              <div class="egs-link-row">
+                <span class="egs-small-tag">FCD → GPS</span>
+                <span class="egs-small-tag">SUMO .net.xml</span>
+                <span class="egs-small-tag">5 Casablanca zones</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="smartlab-note" data-i18n="sumo_scope"><strong>[LIMITATION]</strong> Pour afficher les vraies couches, place les fichiers JSON SUMO dans le même dossier que cette page. Si les fichiers manquent, le module affiche une simulation de démonstration afin d’éviter une carte vide.</p>
+      </div>
+    </section>
+
+    <!-- ========== AI-MCDM INVESTMENT SCORING ========== -->
+    <section class="smartlab smartlab--mcdm" id="ai-mcdm" aria-label="AI-MCDM Investment Scoring for Smart Cities">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__eyebrow" data-i18n="mcdm_eyebrow">Decision Intelligence</span>
+          <h2 class="section-header__title" data-i18n="mcdm_title">AI-MCDM Investment Scoring for Smart Cities</h2>
+          <p class="section-header__subtitle" data-i18n="mcdm_subtitle">Une extension stratégique du projet Casablanca : passer de l’analyse d’emplacements publicitaires à un scorecard d’investissement pour infrastructures urbaines intelligentes.</p>
+          <a class="smartlab-link" href="AI-MCDM Investment Scoring for Smart Cities.pdf" target="_blank" rel="noopener noreferrer" data-i18n="mcdm_pdf">Ouvrir le document AI-MCDM</a>
+        </div>
+
+        <div class="smartlab-grid">
+          <div class="smartlab-card">
+            <h3 data-i18n="mcdm_problem_title">Problème traité</h3>
+            <p data-i18n="mcdm_problem_text">Les décisions d’investissement smart-city sont souvent comparées avec des indicateurs financiers isolés. Le scorecard proposé combine logique financière, exposition carbone, scénario énergétique et risque géoéconomique pour produire un classement plus défendable.</p>
+            <div class="smartlab-tags">
+              <span class="smartlab-tag">NPV / IRR / Payback</span>
+              <span class="smartlab-tag">TCO</span>
+              <span class="smartlab-tag">Carbon-cost exposure</span>
+              <span class="smartlab-tag">Geoeconomic risk</span>
+              <span class="smartlab-tag">MCDM / MCDA</span>
+            </div>
+          </div>
+          <div class="smartlab-card">
+            <h3 data-i18n="mcdm_output_title">Sortie décisionnelle</h3>
+            <p data-i18n="mcdm_output_text">Le résultat attendu est un ranking auditable : chaque projet reçoit un score composite, mais le lecteur peut aussi voir quelles variables expliquent le classement.</p>
+            <p class="smartlab-note" data-i18n="mcdm_note"><strong>[ASSUMPTION]</strong> Le mini-lab ci-dessous illustre la logique du scorecard ; les valeurs affichées sont démonstratives et doivent être remplacées par les données réelles du PDF ou d’un dataset projet.</p>
+          </div>
+        </div>
+
+        <div class="mcdm-architecture" aria-label="AI-MCDM architecture">
+          <article class="mcdm-layer">
+            <small>Layer 01</small>
+            <h3 data-i18n="mcdm_l1_title">Variables financières</h3>
+            <p data-i18n="mcdm_l1_text">ROI, VAN, TRI, délai de récupération et Total Cost of Ownership pour mesurer la robustesse économique.</p>
+          </article>
+          <article class="mcdm-layer">
+            <small>Layer 02</small>
+            <h3 data-i18n="mcdm_l2_title">Scénarios externes</h3>
+            <p data-i18n="mcdm_l2_text">Prix de l’énergie, coût carbone et chocs géoéconomiques intégrés comme variables de stress-test.</p>
+          </article>
+          <article class="mcdm-layer">
+            <small>Layer 03</small>
+            <h3 data-i18n="mcdm_l3_title">Pondération multicritère</h3>
+            <p data-i18n="mcdm_l3_text">MCDM / MCDA pour pondérer les critères au lieu de dépendre d’un seul indicateur financier.</p>
+          </article>
+          <article class="mcdm-layer">
+            <small>Layer 04</small>
+            <h3 data-i18n="mcdm_l4_title">Ranking explicable</h3>
+            <p data-i18n="mcdm_l4_text">Classement final, justification des arbitrages et lecture claire des projets sensibles au carbone ou au risque.</p>
+          </article>
+        </div>
+
+        <div class="mcdm-lab" aria-label="AI-MCDM scoring demo">
+          <div class="mcdm-controls">
+            <div class="mcdm-control">
+              <label for="mcdmCarbonRange"><span data-i18n="mcdm_carbon_label">Poids carbone</span><output id="mcdmCarbonOut">30%</output></label>
+              <input id="mcdmCarbonRange" type="range" min="0" max="60" value="30">
+            </div>
+            <div class="mcdm-control">
+              <label for="mcdmRiskRange"><span data-i18n="mcdm_risk_label">Poids risque géoéconomique</span><output id="mcdmRiskOut">25%</output></label>
+              <input id="mcdmRiskRange" type="range" min="0" max="60" value="25">
+            </div>
+            <p class="smartlab-note" data-i18n="mcdm_lab_note">Utilise les curseurs pour voir comment le classement change quand le carbone ou le risque deviennent plus importants dans la décision.</p>
+          </div>
+          <div class="mcdm-ranking" id="mcdmRanking" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== SKILLS ========== -->
     <section class="skills" id="skills" aria-label="Compétences">
       <div class="container">
@@ -2599,6 +3126,8 @@
           <a href="#about" data-i18n="nav_about">À propos</a>
           <a href="#experiences" data-i18n="nav_exp">Expériences</a>
           <a href="#projects" data-i18n="nav_proj">Projets</a>
+          <a href="#sumo-lab" data-i18n="nav_sumo">SUMO Lab</a>
+          <a href="#ai-mcdm" data-i18n="nav_mcdm">AI-MCDM</a>
           <a href="#engagements" data-i18n="nav_engage">Engagements</a>
           <a href="#contact" data-i18n="nav_contact">Contact</a>
         </div>
@@ -2611,6 +3140,264 @@
       <p class="footer__copy" data-i18n="footer">&copy; 2026 El Ghali Sany — Portfolio professionnel</p>
     </div>
   </footer>
+
+
+
+  <!-- ========== LEAFLET / SUMO / AI-MCDM ENGINES ========== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script>
+    (function(){
+      const EGS_ZONES = {
+        maarif: { label:'Maârif', color:'#FF3355', center:[33.5866,-7.6325], zoom:14, heatmapFile:'maarif_heatmap.json', simulationFile:'maarif_simulation_geo.json', analysis:'Maârif: central dense fabric. Heatmap highlights concentration; simulation displays vehicles from geo-corrected SUMO FCD outputs.' },
+        hay_hassani: { label:'Hay Hassani', color:'#FFB830', center:[33.5607,-7.6900], zoom:14, heatmapFile:'hay_hassani_heatmap.json', simulationFile:'hay_hassani_simulation_geo.json', analysis:'Hay Hassani: peripheral flows and transition zones. Useful to detect localized slowdowns and vehicle accumulation.' },
+        ben_msick: { label:"Ben M'Sick", color:'#00E676', center:[33.5500,-7.5800], zoom:14, heatmapFile:'ben_msick_heatmap.json', simulationFile:'ben_msick_simulation_geo.json', analysis:"Ben M'Sick: dense urban network. The dashboard supports reading conflict points, secondary-road intensity and speed variations." },
+        sidi_maarouf: { label:'Sidi Maârouf', color:'#BF5AF2', center:[33.5250,-7.6500], zoom:14, heatmapFile:'sidi_maarouf_heatmap.json', simulationFile:'sidi_maarouf_simulation_geo.json', analysis:'Sidi Maârouf: strategic employment and arterial area. Simulation shows flows related to business poles and major roads.' },
+        bd_mohammed_v: { label:'Bd. Mohammed V', color:'#00B4D8', center:[33.5950,-7.6100], zoom:15, heatmapFile:'bd_mohammed_v_heatmap.json', simulationFile:'bd_mohammed_v_simulation_geo.json', analysis:'Boulevard Mohammed V: major corridor. Heatmap and simulation identify concentration and slowdown segments.' }
+      };
+
+      let map=null, heatLayer=null, canvas=null, ctx=null;
+      let mode='heatmap', zoneKey='maarif', currentData=null, heatPoints=[], stepIndex=0;
+      let playing=true, raf=null, lastFrame=0;
+      const MAX_HEAT_POINTS=12000, MAX_VEHICLES_PER_FRAME=1600;
+
+      function byId(id){ return document.getElementById(id); }
+      function setText(id,v){ const e=byId(id); if(e) e.textContent=v; }
+      async function loadJson(file){ const r=await fetch(file+'?v='+Date.now()); if(!r.ok) throw new Error(file); return r.json(); }
+
+      function initMap(){
+        if(!window.L || !byId('egsSumoMap')) return;
+        const z=EGS_ZONES[zoneKey];
+        map=L.map('egsSumoMap',{center:z.center,zoom:z.zoom,zoomControl:true,attributionControl:false,preferCanvas:true});
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+        canvas=byId('egsTrafficCanvas');
+        ctx=canvas ? canvas.getContext('2d') : null;
+        resizeCanvas();
+        map.on('move zoom resize',()=>{resizeCanvas(); if(mode==='simulation') drawStep();});
+        window.addEventListener('resize',()=>{resizeCanvas(); if(mode==='simulation') drawStep();});
+      }
+
+      function resizeCanvas(){
+        if(!canvas||!ctx) return;
+        const r=canvas.getBoundingClientRect(), d=window.devicePixelRatio||1;
+        canvas.width=r.width*d; canvas.height=r.height*d;
+        ctx.setTransform(d,0,0,d,0,0);
+      }
+      function clearCanvas(){ if(!ctx||!canvas) return; const r=canvas.getBoundingClientRect(); ctx.clearRect(0,0,r.width,r.height); }
+      function removeHeat(){ if(heatLayer){ map.removeLayer(heatLayer); heatLayer=null; } }
+
+      function updateUI(){
+        const isHeat=mode==='heatmap', z=EGS_ZONES[zoneKey];
+        document.querySelectorAll('.egs-mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.egsMode===mode));
+        document.querySelectorAll('.egs-zone-btn').forEach(b=>b.classList.toggle('active',b.dataset.egsZone===zoneKey));
+        byId('egsHeatControls')?.classList.toggle('egs-hidden',!isHeat);
+        byId('egsSimulationControls')?.classList.toggle('egs-hidden',isHeat);
+        byId('egsHeatLegend')?.classList.toggle('egs-hidden',!isHeat);
+        byId('egsSimulationLegend')?.classList.toggle('egs-hidden',isHeat);
+        setText('egsZoneTitle', z.label);
+        setText('egsAnalysisText', z.analysis);
+        setText('egsMainLabel', isHeat?'POINTS':'VISIBLE');
+        ['egsKpiMain','egsKpiVehicles','egsKpiSteps','egsKpiSpeed'].forEach(id=>setText(id,'—'));
+      }
+
+      async function loadCurrent(){
+        if(!map) return;
+        cancelAnimationFrame(raf); raf=null; playing=false; stepIndex=0;
+        removeHeat(); clearCanvas(); updateUI();
+        const z=EGS_ZONES[zoneKey];
+        map.setView(z.center,z.zoom);
+        if(mode==='heatmap') await loadHeatmap(); else await loadSimulation();
+      }
+
+      async function loadHeatmap(){
+        const z=EGS_ZONES[zoneKey];
+        setText('egsStatusText','Loading SUMO heatmap...');
+        try{
+          currentData=await loadJson(z.heatmapFile);
+          if(!currentData.points) throw new Error('Invalid heatmap format');
+          setText('egsStatusText','Loaded: '+z.heatmapFile);
+        }catch(e){
+          currentData=makeDemoHeatmap(z);
+          setText('egsStatusText','Demo layer — missing JSON: '+z.heatmapFile);
+        }
+        heatPoints=normalizeHeat(currentData.points||[]);
+        drawHeatmap();
+        updateHeatKpis();
+      }
+
+      function makeDemoHeatmap(z){
+        const points=[];
+        for(let i=0;i<420;i++){
+          const ring=(i%9)/9;
+          const angle=i*0.618;
+          const lat=z.center[0] + Math.sin(angle)*0.011*ring + (Math.random()-.5)*0.0025;
+          const lng=z.center[1] + Math.cos(angle)*0.014*ring + (Math.random()-.5)*0.0025;
+          const intensity=Math.max(.08, Math.min(1, .25 + ring*.65 + Math.random()*.16));
+          points.push([lat,lng,intensity]);
+        }
+        return { points, kpis:{ vehicleRecords: 4200, steps: 180, averageSpeed: 7.4 } };
+      }
+
+      function normalizeHeat(points){
+        const arr=[];
+        for(const p of points){
+          if(Array.isArray(p) && p.length>=2){
+            const lat=+p[0], lng=+p[1], intensity=+(p[2]||0.4);
+            if(Number.isFinite(lat)&&Number.isFinite(lng)) arr.push([lat,lng,Math.max(.05,Math.min(intensity,1))]);
+          }else if(p && typeof p==='object'){
+            const lat=+(p.lat ?? p.latitude), lng=+(p.lng ?? p.lon ?? p.longitude), intensity=+(p.intensity ?? p.weight ?? .4);
+            if(Number.isFinite(lat)&&Number.isFinite(lng)) arr.push([lat,lng,Math.max(.05,Math.min(intensity,1))]);
+          }
+        }
+        if(arr.length<=MAX_HEAT_POINTS) return arr;
+        const interval=Math.ceil(arr.length/MAX_HEAT_POINTS);
+        return arr.filter((_,i)=>i%interval===0).slice(0,MAX_HEAT_POINTS);
+      }
+
+      function drawHeatmap(){
+        removeHeat();
+        if(!heatPoints.length||!window.L?.heatLayer) return;
+        const radius=+byId('egsRadiusRange').value, blur=+byId('egsBlurRange').value, mult=+byId('egsIntensityRange').value/12;
+        const pts=heatPoints.map(p=>[p[0],p[1],Math.min(.70,p[2]*mult)]);
+        heatLayer=L.heatLayer(pts,{ radius, blur, maxZoom:18, minOpacity:.08, max:1, gradient:{0.15:'#00FF88',0.35:'#FFD700',0.60:'#FF8A00',1:'#FF3355'} }).addTo(map);
+        fitPoints(pts);
+      }
+
+      function updateHeatKpis(){
+        setText('egsKpiMain',heatPoints.length.toLocaleString('fr-FR'));
+        const k=currentData.kpis||{};
+        setText('egsKpiVehicles',Number(k.vehicleRecords||0).toLocaleString('fr-FR'));
+        setText('egsKpiSteps',Number(k.steps||0).toLocaleString('fr-FR'));
+        setText('egsKpiSpeed',Number(k.averageSpeed||0).toFixed(2)+' m/s');
+      }
+
+      async function loadSimulation(){
+        const z=EGS_ZONES[zoneKey];
+        setText('egsStatusText','Loading SUMO geo simulation...');
+        try{
+          currentData=await loadJson(z.simulationFile);
+          if(!currentData.timesteps) throw new Error('Invalid simulation format');
+          setText('egsStatusText','Loaded: '+z.simulationFile);
+        }catch(e){
+          currentData=makeDemoSimulation(z);
+          setText('egsStatusText','Demo simulation — missing JSON: '+z.simulationFile);
+        }
+        setText('egsKpiSteps',currentData.timesteps.length.toLocaleString('fr-FR'));
+        if(currentData.kpis) setText('egsKpiSpeed',Number(currentData.kpis.averageSpeed||0).toFixed(2)+' m/s');
+        setTimeout(()=>{ resizeCanvas(); fitSimulation(); playing=true; startAnimation(); },250);
+      }
+
+      function makeDemoSimulation(z){
+        const timesteps=[];
+        for(let t=0;t<160;t++){
+          const vehicles=[];
+          for(let i=0;i<80;i++){
+            const lane=(i%8)-4;
+            const phase=(t/160 + i/80)%1;
+            const lat=z.center[0] + (phase-.5)*0.030 + lane*0.00065 + Math.sin(t/12+i)*0.00045;
+            const lng=z.center[1] + Math.sin(phase*Math.PI*2)*0.010 + lane*0.00035;
+            const speed=2 + ((i+t)%13);
+            const angle=90 + Math.sin(phase*Math.PI*2)*38;
+            vehicles.push({lat,lng,speed,angle});
+          }
+          timesteps.push({time:t, vehicles});
+        }
+        return { timesteps, kpis:{averageSpeed:7.8} };
+      }
+
+      function getLL(v){ const lat=+(v.lat), lng=+(v.lng); return Number.isFinite(lat)&&Number.isFinite(lng)?[lat,lng]:null; }
+      function fitSimulation(){
+        if(!currentData?.timesteps) return;
+        const pts=[];
+        for(const st of currentData.timesteps){
+          for(const v of (st.vehicles||[])){ const ll=getLL(v); if(ll) pts.push(ll); }
+          if(pts.length>3000) break;
+        }
+        fitPoints(pts); drawStep();
+      }
+      function drawStep(){
+        if(mode!=='simulation'||!currentData?.timesteps) return;
+        const st=currentData.timesteps[stepIndex]; if(!st) return;
+        clearCanvas();
+        const vs=sampleVehicles(st.vehicles||[],MAX_VEHICLES_PER_FRAME);
+        let n=0, sum=0;
+        for(const v of vs){
+          const ll=getLL(v); if(!ll) continue;
+          const pt=map.latLngToContainerPoint(ll);
+          const sp=+(v.speed||0), angle=+(v.angle||0);
+          if(!Number.isFinite(pt.x)||!Number.isFinite(pt.y)) continue;
+          drawVehicle(pt.x,pt.y,sp,angle); n++; sum+=sp;
+        }
+        setText('egsKpiMain',n.toLocaleString('fr-FR'));
+        setText('egsKpiVehicles',n.toLocaleString('fr-FR'));
+        setText('egsKpiSpeed',(n?sum/n:0).toFixed(2)+' m/s');
+      }
+      function sampleVehicles(vs,max){ if(vs.length<=max) return vs; const interval=Math.ceil(vs.length/max); return vs.filter((_,i)=>i%interval===0); }
+      function colorSpeed(s){ return s<3?'#FF3355':s<8?'#FFD700':'#00FF88'; }
+      function drawVehicle(x,y,speed,angle){
+        if(!ctx) return;
+        const size=+byId('egsVehicleSizeRange').value||6, col=colorSpeed(speed), a=(+(angle||0)-90)*Math.PI/180;
+        ctx.save(); ctx.translate(x,y); ctx.rotate(a); ctx.fillStyle=col; ctx.strokeStyle='rgba(255,255,255,.95)'; ctx.lineWidth=1.4; ctx.shadowBlur=10; ctx.shadowColor=col;
+        roundRect(-size,-size/2,size*2.4,size*1.15,Math.max(2,size/2)); ctx.fill(); ctx.stroke(); ctx.restore();
+      }
+      function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r); ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h); ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r); ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath(); }
+      function startAnimation(){ cancelAnimationFrame(raf); lastFrame=0; raf=requestAnimationFrame(loop); }
+      function loop(t){
+        if(mode!=='simulation') return;
+        const delay=Math.max(20,280-(+byId('egsSpeedRange').value||6)*20);
+        if(playing&&t-lastFrame>=delay){ drawStep(); stepIndex=(stepIndex+1)%currentData.timesteps.length; lastFrame=t; }
+        raf=requestAnimationFrame(loop);
+      }
+      function fitPoints(points){ if(!points||!points.length||!window.L) return; const b=L.latLngBounds(points.map(p=>[p[0],p[1]])); if(b.isValid()) map.fitBounds(b,{padding:[30,30],maxZoom:EGS_ZONES[zoneKey].zoom}); }
+      function bindEvents(){
+        document.querySelectorAll('.egs-mode-btn').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.egsMode; loadCurrent();}));
+        document.querySelectorAll('.egs-zone-btn').forEach(b=>b.addEventListener('click',()=>{zoneKey=b.dataset.egsZone; loadCurrent();}));
+        ['egsRadiusRange','egsBlurRange','egsIntensityRange'].forEach(id=>byId(id)?.addEventListener('input',()=>{ if(mode==='heatmap') drawHeatmap(); }));
+        byId('egsResetHeatmapBtn')?.addEventListener('click',()=>{ if(mode==='heatmap') drawHeatmap(); });
+        byId('egsPlayBtn')?.addEventListener('click',()=>playing=true);
+        byId('egsPauseBtn')?.addEventListener('click',()=>playing=false);
+        byId('egsRestartBtn')?.addEventListener('click',()=>{stepIndex=0; drawStep();});
+        byId('egsVehicleSizeRange')?.addEventListener('input',drawStep);
+        byId('egsResetSimulationBtn')?.addEventListener('click',fitSimulation);
+      }
+      document.addEventListener('DOMContentLoaded',()=>{
+        const panel=byId('sumo-dashboard'); if(!panel) return;
+        bindEvents();
+        const launch=()=>{ if(!map) initMap(); loadCurrent(); };
+        if('IntersectionObserver' in window){
+          const obs=new IntersectionObserver(entries=>{ if(entries[0].isIntersecting){ launch(); obs.disconnect(); } },{threshold:.10});
+          obs.observe(panel);
+        }else{ launch(); }
+      });
+    })();
+
+    (function(){
+      const projects = [
+        { name:'Smart Mobility Corridor', meta:'High demand / medium carbon exposure', financial:86, climate:62, risk:70, strategic:82 },
+        { name:'District Cooling Network', meta:'Energy efficiency / high climate resilience', financial:74, climate:90, risk:78, strategic:84 },
+        { name:'Smart Grid Coastal Zone', meta:'Grid resilience / high geoeconomic sensitivity', financial:80, climate:84, risk:58, strategic:88 },
+        { name:'Water Management Platform', meta:'Urban resilience / moderate financial payback', financial:68, climate:92, risk:82, strategic:80 }
+      ];
+      function byId(id){ return document.getElementById(id); }
+      function renderMcdm(){
+        const root=byId('mcdmRanking'); if(!root) return;
+        const carbon=+byId('mcdmCarbonRange').value;
+        const risk=+byId('mcdmRiskRange').value;
+        const remaining=Math.max(0,100-carbon-risk);
+        byId('mcdmCarbonOut').textContent=carbon+'%';
+        byId('mcdmRiskOut').textContent=risk+'%';
+        const ranked=projects.map(p=>{
+          const score=(p.climate*carbon + p.risk*risk + ((p.financial*.55)+(p.strategic*.45))*remaining)/100;
+          return {...p, score};
+        }).sort((a,b)=>b.score-a.score);
+        root.innerHTML=ranked.map((p,i)=>`<div class="mcdm-row"><span class="mcdm-rank">${i+1}</span><span><span class="mcdm-name">${p.name}</span><span class="mcdm-meta">${p.meta}</span></span><span class="mcdm-score">${p.score.toFixed(1)}</span><div class="mcdm-bar"><span style="--w:${Math.max(8,Math.min(100,p.score))}%"></span></div></div>`).join('');
+      }
+      document.addEventListener('DOMContentLoaded',()=>{
+        ['mcdmCarbonRange','mcdmRiskRange'].forEach(id=>byId(id)?.addEventListener('input',renderMcdm));
+        renderMcdm();
+      });
+    })();
+  </script>
 
   <!-- ========== SCROLL ANIMATIONS ========== -->
   <script>
@@ -2907,6 +3694,41 @@
         mini_dl: "Download the Excel dashboard template",
         mini_disclaimer: "* Simulated data — no actual SAN MAROC data was used.",
 
+
+
+        // Smart city / SUMO / AI-MCDM additions
+        sumo_eyebrow: "Urban Intelligence",
+        sumo_title: "Leaflet/SUMO Traffic Lab",
+        sumo_subtitle: "An interactive interface connecting SUMO simulation, Leaflet mapping and financial interpretation of urban locations.",
+        sumo_card_title: "Why this section strengthens the portfolio",
+        sumo_card_text: "It turns an academic project into a visual demonstrator: recruiters can immediately see the ability to connect geospatial data, mobility flows, KPIs and investment decisions.",
+        sumo_metrics_title: "What the lab shows",
+        sumo_metrics_text: "The module displays zones, traffic density, simulated vehicles and decision indicators linking commercial attractiveness with potential profitability.",
+        sumo_kpi1: "Casablanca zones",
+        sumo_kpi2: "modes: heatmap / simulation",
+        sumo_kpi3: "SUMO data ready to load",
+        sumo_scope: "<strong>[LIMITATION]</strong> To display the real layers, place the SUMO JSON files in the same folder as this page. If the files are missing, the module displays a demo simulation to avoid an empty map.",
+        mcdm_eyebrow: "Decision Intelligence",
+        mcdm_title: "AI-MCDM Investment Scoring for Smart Cities",
+        mcdm_subtitle: "A strategic extension of the Casablanca project: moving from advertising-location analytics to an investment scorecard for smart-city infrastructure.",
+        mcdm_pdf: "Open the AI-MCDM document",
+        mcdm_problem_title: "Problem addressed",
+        mcdm_problem_text: "Smart-city investment decisions are often compared through isolated financial indicators. The proposed scorecard combines financial logic, carbon exposure, energy scenarios and geoeconomic risk to produce a more defensible ranking.",
+        mcdm_output_title: "Decision output",
+        mcdm_output_text: "The expected result is an auditable ranking: each project receives a composite score, but the reader can also see which variables explain the ranking.",
+        mcdm_note: "<strong>[ASSUMPTION]</strong> The mini-lab below illustrates the scorecard logic; displayed values are demonstrative and should be replaced by the real PDF or project dataset values.",
+        mcdm_l1_title: "Financial variables",
+        mcdm_l1_text: "ROI, NPV, IRR, payback period and Total Cost of Ownership to measure economic robustness.",
+        mcdm_l2_title: "External scenarios",
+        mcdm_l2_text: "Energy price, carbon cost and geoeconomic shocks integrated as stress-test variables.",
+        mcdm_l3_title: "Multi-criteria weighting",
+        mcdm_l3_text: "MCDM / MCDA to weight criteria instead of relying on a single financial indicator.",
+        mcdm_l4_title: "Explainable ranking",
+        mcdm_l4_text: "Final ranking, arbitration logic and clear reading of projects sensitive to carbon or risk.",
+        mcdm_carbon_label: "Carbon weight",
+        mcdm_risk_label: "Geoeconomic risk weight",
+        mcdm_lab_note: "Use the sliders to see how the ranking changes when carbon or risk becomes more important in the decision.",
+
         // Dates & locations
         san_date: "Feb. 2026 – Aug. 2026",
         san_loc: "Casablanca / France (Remote)",
@@ -3011,6 +3833,41 @@
         conf_item4: "Cette démarche vise à respecter les standards de confidentialité, de protection des données et de secret des affaires attendus en finance, data et conseil.",
 
         // Contact
+
+
+        // Smart city / SUMO / AI-MCDM additions
+        sumo_eyebrow: "Urban Intelligence",
+        sumo_title: "Leaflet/SUMO Traffic Lab",
+        sumo_subtitle: "Une interface interactive qui relie simulation SUMO, carte Leaflet et lecture financière des emplacements urbains.",
+        sumo_card_title: "Pourquoi cette partie renforce le portfolio",
+        sumo_card_text: "Elle transforme un projet académique en démonstrateur visuel : le recruteur voit directement la capacité à connecter données géospatiales, flux de mobilité, KPIs et décision d’investissement.",
+        sumo_metrics_title: "Ce que le lab montre",
+        sumo_metrics_text: "Le module affiche les zones, la densité de trafic, les véhicules simulés et les indicateurs utiles pour relier attractivité commerciale et rentabilité potentielle.",
+        sumo_kpi1: "zones Casablanca",
+        sumo_kpi2: "modes : heatmap / simulation",
+        sumo_kpi3: "données SUMO prêtes à charger",
+        sumo_scope: "<strong>[LIMITATION]</strong> Pour afficher les vraies couches, place les fichiers JSON SUMO dans le même dossier que cette page. Si les fichiers manquent, le module affiche une simulation de démonstration afin d’éviter une carte vide.",
+        mcdm_eyebrow: "Decision Intelligence",
+        mcdm_title: "AI-MCDM Investment Scoring for Smart Cities",
+        mcdm_subtitle: "Une extension stratégique du projet Casablanca : passer de l’analyse d’emplacements publicitaires à un scorecard d’investissement pour infrastructures urbaines intelligentes.",
+        mcdm_pdf: "Ouvrir le document AI-MCDM",
+        mcdm_problem_title: "Problème traité",
+        mcdm_problem_text: "Les décisions d’investissement smart-city sont souvent comparées avec des indicateurs financiers isolés. Le scorecard proposé combine logique financière, exposition carbone, scénario énergétique et risque géoéconomique pour produire un classement plus défendable.",
+        mcdm_output_title: "Sortie décisionnelle",
+        mcdm_output_text: "Le résultat attendu est un ranking auditable : chaque projet reçoit un score composite, mais le lecteur peut aussi voir quelles variables expliquent le classement.",
+        mcdm_note: "<strong>[ASSUMPTION]</strong> Le mini-lab ci-dessous illustre la logique du scorecard ; les valeurs affichées sont démonstratives et doivent être remplacées par les données réelles du PDF ou d’un dataset projet.",
+        mcdm_l1_title: "Variables financières",
+        mcdm_l1_text: "ROI, VAN, TRI, délai de récupération et Total Cost of Ownership pour mesurer la robustesse économique.",
+        mcdm_l2_title: "Scénarios externes",
+        mcdm_l2_text: "Prix de l’énergie, coût carbone et chocs géoéconomiques intégrés comme variables de stress-test.",
+        mcdm_l3_title: "Pondération multicritère",
+        mcdm_l3_text: "MCDM / MCDA pour pondérer les critères au lieu de dépendre d’un seul indicateur financier.",
+        mcdm_l4_title: "Ranking explicable",
+        mcdm_l4_text: "Classement final, justification des arbitrages et lecture claire des projets sensibles au carbone ou au risque.",
+        mcdm_carbon_label: "Poids carbone",
+        mcdm_risk_label: "Poids risque géoéconomique",
+        mcdm_lab_note: "Utilise les curseurs pour voir comment le classement change quand le carbone ou le risque deviennent plus importants dans la décision.",
+
         contact_eyebrow: "Contact",
         contact_title: "Travaillons ensemble",
         contact_subtitle: "Disponible pour échanger sur une alternance en analyse financière, modélisation, pilotage de performance ou data analytics.",
